@@ -10,8 +10,8 @@ function Header(props) {
         <div className="header-info">
             <div className="header-title">2048</div>
             <div className="header-score">
-                <div className="header-live_score">{props.Total}</div>
-                <div className="header-best_score">0</div>
+                <div className="header-live_score">SCORE {props.Total}</div>
+                <div className="header-best_score">TOP 0</div>
             </div>
         </div>
     );

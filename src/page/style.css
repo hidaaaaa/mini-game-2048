@@ -29,7 +29,7 @@ body {
     width: 70%;
 }
 .header-score {
-    width: 30%;
+    width: 50%;
     display: flex;
 }
 .header-live_score {
