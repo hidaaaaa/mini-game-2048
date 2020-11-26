@@ -14,12 +14,18 @@ body {
     font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
     font-weight: bold;
     background-color: black;
+    height: 100vh;
 }
+
 .game-container {
     background-color: #faf8ef;
-    width: 500px;
-    margin: 20px;
+    width: 40%;
     border-radius: 5px;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    /* bring your own prefixes */
+    transform: translate(-50%, -50%);
 }
 .header-info {
     display: flex;
@@ -29,7 +35,7 @@ body {
     width: 70%;
 }
 .header-score {
-    width: 30%;
+    width: 50%;
     display: flex;
 }
 .header-live_score {
@@ -104,10 +110,30 @@ tr {
     background-color: #edc22d;
 }
 .btn-new_game {
-    margin-left: 46px;
+    margin: 10px 40px;
     background-color: #e63e3e;
     border: 0;
     padding: 10px;
     border-radius: 3px;
     color: blanchedalmond;
+}
+
+.bg-text {
+    background-color: rgb(0, 0, 0); /* Fallback color */
+    background-color: rgba(0, 0, 0, 0.4); /* Black w/opacity/see-through */
+    color: white;
+    font-weight: bold;
+    border: 3px solid #f1f1f1;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 2;
+    width: 40%;
+    padding: 20px;
+    text-align: center;
+}
+
+.hidden {
+    display: none;
 }
