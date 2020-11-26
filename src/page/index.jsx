@@ -21,7 +21,7 @@ function FeatureGame(props) {
     function randomNumber() {
         let newList = [...listApp]
         let listEmpty = [...listApp].filter(item => item.value === null);
-        if (listEmpty.length === 0) return;
+        if (listEmpty.length === 0) return false;
         let numberOfRandom = (Math.random() <= 0.8) ? 1 : 2;
         for (let i = 0; i < numberOfRandom; i++) {
             let randomNum = (Math.random() <= 0.8) ? 1 : (Math.random() > 0.8 && Math.random() <= 0.98) ? 2 : 3;
@@ -91,6 +91,8 @@ function FeatureGame(props) {
         })
     }
 
+
+
     function changeValue(keycode) {
         let newList = [...listApp];
 
@@ -109,14 +111,30 @@ function FeatureGame(props) {
         let a = newList.filter(item => item.value !== null).map(item => item.value).reduce((sum, num) => {
             return sum + num;
         }, 0)
+
+
+        if (a > BestScore) {
+            setBestScore(a);
+        }
         setTotal(a);
         setListApp(newList);
+    }
+
+    function checkFull(list, newList) {
+        var t = false;
+        list.forEach(item => {
+            for (let i = 0; i < item.length - 1; i++) {
+                if (newList[item[i]].value === newList[item[i + 1]].value || newList[item[i]].value === null) {
+                    t = true;
+                }
+            }
+        })
+        return t;
     }
 
     function handleKeyDown(e) {
         if (e.keyCode === 37) {
             changeValue(37);
-
         }
         if (e.keyCode === 38) {
             changeValue(38);
@@ -127,13 +145,19 @@ function FeatureGame(props) {
         if (e.keyCode === 40) {
             changeValue(40);
         }
+        if (checkFull(horizontal, listApp) || checkFull(vertical, listApp)) {
 
+        }
+        else {
+            document.getElementById("replay-btn").classList.remove("hidden");
+        }
         randomNumber();
     }
 
     function handleNewGameBtn() {
         setListApp(initListApp);
         setTotal(0);
+        document.getElementById("replay-btn").classList.add("hidden");
     }
 
     useEffect(() => {
@@ -143,13 +167,20 @@ function FeatureGame(props) {
         };
     });
 
+
+
+    const [BestScore, setBestScore] = useState(0);
     const [Total, setTotal] = useState(0);
     const [listApp, setListApp] = useState(initListApp);
 
     return (
         <div className="main">
+            <div id="replay-btn" className="bg-text hidden">
+                <div>GAME OVER</div>
+                <button className="btn-new_game" onClick={handleNewGameBtn}>PLAY AGAIN</button>
+            </div>
             <div className="game-container">
-                <Header Total={Total} />
+                <Header Total={Total} BestScore={BestScore} />
                 <button className="btn-new_game" onClick={handleNewGameBtn} >New Game</button>
                 <Game listApp={listApp} />
             </div>
