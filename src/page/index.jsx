@@ -112,26 +112,24 @@ function FeatureGame(props) {
             return sum + num;
         }, 0)
 
-        if (checkFull(horizontal, newList) || checkFull(vertical, newList)) {
-            setListApp(newList);
-        }
-        else {
-            document.getElementById("replay-btn").classList.remove("hidden");
-        }
 
+        if (a > BestScore) {
+            setBestScore(a);
+        }
         setTotal(a);
-
+        setListApp(newList);
     }
 
     function checkFull(list, newList) {
+        var t = false;
         list.forEach(item => {
             for (let i = 0; i < item.length - 1; i++) {
-                if (newList[item[i]].value === newList[item[i + 1]].value) {
-                    return true;
+                if (newList[item[i]].value === newList[item[i + 1]].value || newList[item[i]].value === null) {
+                    t = true;
                 }
             }
         })
-        return false;
+        return t;
     }
 
     function handleKeyDown(e) {
@@ -147,12 +145,19 @@ function FeatureGame(props) {
         if (e.keyCode === 40) {
             changeValue(40);
         }
+        if (checkFull(horizontal, listApp) || checkFull(vertical, listApp)) {
+
+        }
+        else {
+            document.getElementById("replay-btn").classList.remove("hidden");
+        }
         randomNumber();
     }
 
     function handleNewGameBtn() {
         setListApp(initListApp);
         setTotal(0);
+        document.getElementById("replay-btn").classList.add("hidden");
     }
 
     useEffect(() => {
@@ -172,7 +177,7 @@ function FeatureGame(props) {
         <div className="main">
             <div id="replay-btn" className="bg-text hidden">
                 <div>GAME OVER</div>
-                <div><button>PLAY AGAIN</button></div>
+                <button className="btn-new_game" onClick={handleNewGameBtn}>PLAY AGAIN</button>
             </div>
             <div className="game-container">
                 <Header Total={Total} BestScore={BestScore} />

@@ -16,6 +16,7 @@ body {
     background-color: black;
     height: 100vh;
 }
+
 .game-container {
     background-color: #faf8ef;
     width: 40%;
@@ -109,7 +110,7 @@ tr {
     background-color: #edc22d;
 }
 .btn-new_game {
-    margin-left: 46px;
+    margin: 10px 40px;
     background-color: #e63e3e;
     border: 0;
     padding: 10px;
